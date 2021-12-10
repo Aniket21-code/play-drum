@@ -4,64 +4,6 @@
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-html {
-  font-size: 10px;
-  background: url('https://images.pexels.com/photos/1601464/pexels-photo-1601464.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260') bottom center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-body,html {
-  margin: 0;
-  padding: 0; 
-  font-family: sans-serif;
-}
-
-.keys {
-  display: flex;
-  flex: 0;
-  min-height: 35vh;
-  align-items: center;
-  justify-content: center;
-}
-
-.key {
-  border: .4rem solid black;
-  border-radius: .10rem;
-  margin: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem .5rem;
-  transition: all .1s ease;
-  width: 10rem;
-  text-align: center;
-  color: white;
-  background: rgba(0,0,0,0.4);
-  text-shadow: 0 0 .5rem black;
-}
-.tee{
-            display: flex;
-        }
-
-.playing {
-  transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
-}
-
-kbd {
-  display: block;
-  font-size: 4rem;
-}
-
-.sound {
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: .1rem;
-  color: #e2f76c;
-}
-</style>
 </head>
 <body>
   <div>
@@ -162,27 +104,6 @@ kbd {
   <audio data-key="85" src="https://sampleswap.org/samples-ghost/VOCALS%20and%20SPOKEN%20WORD/African%20Vocals%20Sung/758[kb]african-vocals-gubulah-mid.wav.mp3"></audio>
   <!-- <audio data-key="85" src="https://sampleswap.org/samples-ghost/VOCALS%20and%20SPOKEN%20WORD/Indian%20Singing/1287[kb]male-indian-chanting.wav.mp3"></audio> -->
   
-<script>
-  function removeTransition(e) {
-    if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
-  }
-
-  function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!audio) return;
-
-    key.classList.add('playing');
-    audio.currentTime = 0;
-    audio.play();
-  }
-
-  const keys = Array.from(document.querySelectorAll('.key'));
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound);
-</script>
-
 
 </body>
 </html>
