@@ -1,10 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="drum.css">
-  <script type="text/javascript" src="drum.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+html {
+  font-size: 10px;
+  background: url('https://images.pexels.com/photos/1601464/pexels-photo-1601464.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260') bottom center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body,html {
+  margin: 0;
+  padding: 0; 
+  font-family: sans-serif;
+}
+
+.keys {
+  display: flex;
+  flex: 0;
+  min-height: 35vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.key {
+  border: .4rem solid black;
+  border-radius: .10rem;
+  margin: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem .5rem;
+  transition: all .1s ease;
+  width: 10rem;
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  text-shadow: 0 0 .5rem black;
+}
+.tee{
+            display: flex;
+        }
+
+.playing {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  box-shadow: 0 0 1rem #ffc600;
+}
+
+kbd {
+  display: block;
+  font-size: 4rem;
+}
+
+.sound {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  color: #e2f76c;
+}
+</style>
 </head>
 <body>
   <div>
@@ -105,6 +163,289 @@
   <audio data-key="85" src="https://sampleswap.org/samples-ghost/VOCALS%20and%20SPOKEN%20WORD/African%20Vocals%20Sung/758[kb]african-vocals-gubulah-mid.wav.mp3"></audio>
   <!-- <audio data-key="85" src="https://sampleswap.org/samples-ghost/VOCALS%20and%20SPOKEN%20WORD/Indian%20Singing/1287[kb]male-indian-chanting.wav.mp3"></audio> -->
   
+<script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
 
 </body>
 </html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drumers</title>
+    <style>
+       body{
+            background-image: url('https://images.pexels.com/photos/1601464/pexels-photo-1601464.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+            opacity: 0.89;
+            z-index: -2;
+            background-repeat: no-repeat;
+            font-size: medium;
+            display: block;
+            background-repeat:no-repeat;
+            background-size: cover;
+            align-content: center; 
+            justify-content: center; 
+            } 
+         .key{
+            border:5px solid rgb(0, 0, 0);
+            border-radius: 2px;
+            margin: 20px;
+            font-size: 30px;
+            padding:2px;
+            transition: all 0.5s;
+            width:100px;
+            color: rgb(157, 177, 177);
+            text-shadow: 0 0 1px rgb(177, 177, 99);
+            justify-content: center;
+            text-align: center;
+            
+            
+
+
+        }
+        .tee{
+            display: flex;
+        }
+        .playing{
+            transform: scale(1.1,1.1);
+            border-color: rgb(25, 0, 255);
+            box-shadow: 22px 22px 50px rgb(245, 243, 138);
+           
+        }
+        .sound{
+            font-size: 20px;
+            
+            text-transform: uppercase;
+             /* letter-spacing:10px; */
+             color:rgb(0, 0, 0)
+        }
+        .kbd{
+            display: block;
+            text-align: center; 
+            position: relative;
+            font-size: 50px;
+            justify-content: center;
+            padding: 0 0 45px 0;
+            margin: 22px;
+
+        } 
+    </>
+</head>
+<body>
+    <h1 style="color: rgb(238, 255, 0); text-align: center;    display: block;justify-content: center; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">LET'S PLAY THE DRUM</h1>
+    <h2 style="color: white; text-align: center; justify-content: center;">press the alternative buttons of  alphabates provided on your screen to do play action of drum </h2>
+    <h3 style="text-align: center;">okay,so be ready for the party coz u gonna rock from this so lets play along!!!!!...</h3>
+    <div class="tee">
+    <div >
+            <div data-key="65" class="key">
+                <kbd>A</kbd><br>
+                <span class="sound">hihat</span>
+            </div>
+                
+            <div data-key="66" class="key">
+                <kbd>B</kbd><br>
+                <span class="sound">beat</span>
+            </div>
+            <div data-key="69" class="key">
+                <kbd>E</kbd><br>
+                <span class="sound">Ride </span>
+            </div>
+            <div data-key="70" class="key">
+                <kbd>F</kbd><br>
+                <span class="sound">clap</span>
+            </div>
+                <div data-key="80" class="key">
+                <kbd>P</kbd><br>
+            <span class="sound">tabla</span>
+            </div>
+                <div data-key="81" class="key">
+                <kbd>Q</kbd><br>
+            <span class="sound">openhat</span>
+            </div>
+</div>
+    <div >
+        <div >
+
+        </div>
+        <div data-key="82" class="key">
+            <kbd>R</kbd><br>
+            <span class="sound">kick</span>
+            </div>
+        <div data-key="83" class="key">
+            <kbd>S</kbd><br>
+            <span class="sound">snare</span>
+            </div>
+        
+        <div data-key="87" class="key">
+            <kbd>W</kbd><br>
+            <span class="sound">comon</span>
+            </div>
+        <div data-key="74" class="key">
+            <kbd>J</kbd><br>
+            <span class="sound">tabla1</span>
+            </div>
+        <div data-key="67" class="key">
+            <kbd>C</kbd><br>
+            <span class="sound">TOM1</span>
+            </div>
+    </div>
+    <div>
+        <div data-key="68" class="key">
+            <kbd>D</kbd><br>
+            <span class="sound">bell</span>
+        </div>
+        <div data-key="71" class="key">
+            <kbd>G</kbd><br>
+            <span class="sound">Hats</span>
+        </div>
+        <div data-key="72" class="key">
+            <kbd>H</kbd><br>
+            <span class="sound">bass</span>
+        </div>
+        <div data-key="73" class="key">
+            <kbd>I</kbd><br>
+            <span class="sound">voice</span>
+        </div>
+   </div>
+    <div>
+        <div data-key="75" class="key">
+            <kbd>K</kbd><br>
+            <span class="sound">bell</span>
+        </div>
+        <div data-key="76" class="key">
+            <kbd>L</kbd><br>
+            <span class="sound">sitar</span>
+        </div>
+        <div data-key="77" class="key">
+            <kbd>M</kbd><br>
+            <span class="sound">flute</span>
+        </div>
+        
+    </div>
+    <div>
+        <div data-key="78" class="key">
+            <kbd>N</kbd><br>
+            <span class="sound">piano</span>
+        </div>
+        <div data-key="79" class="key">
+            <kbd>O</kbd><br>
+            <span class="sound">piano2</span>
+        </div>
+   </div>
+    <div>
+        
+        <div data-key="85" class="key">
+            <kbd>U</kbd><br>
+            <span class="sound">chanting</span>
+        </div>
+   </div>
+  
+   
+  
+   
+ </div>
+ <audio data-key="70" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Claps/295[kb]big-verby-clap.wav.mp3"></audio>
+
+ <audio data-key="82" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Kicks/59[kb]adjusted-kick.wav.mp3"></audio>
+
+ <audio data-key="65" src="https://sampleswap.org/samples-ghost/DRUM%20LOOPS%20and%20BREAKS/000%20to%20080%20bpm/292[kb]072_tribal_with_bendy_drum.wav.mp3"></audio>;
+ <audio data-key="81" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Hats/25[kb]ec-hat034.wav.mp3"></audio>
+
+ <audio data-key="87" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Voice/115[kb]voice_come_on2.wav.mp3"></audio>
+ <audio data-key="69" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Punches%20Hits%20Discoblasts/167[kb]classic-rave-stab.wav.mp3"></audio>
+
+ <audio data-key="83" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Snares/143[kb]brass-sd-soft.wav.mp3"></audio>
+
+ <audio data-key="80" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Tabla/81[kb]tabla6.wav.mp3"></audio>
+ <audio data-key="66" src="https://sampleswap.org/samples-ghost/DRUM%20LOOPS%20and%20BREAKS/161%20to%20180%20bpm/260[kb]161_breakin_snareaction.wav.mp3"></audio>
+ <audio data-key="74" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Tabla/143[kb]tabla2.wav.mp3"></audio>
+ <audio data-key="67" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Toms/225[kb]tom-tom-spring-verb-hi.wav.mp3"></audio>
+ <audio data-key="68" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Western%20and%20Latin%20Percussion/18[kb]bell2.wav.mp3"></audio>
+ <audio data-key="71" src="https://sampleswap.org/samples-ghost/DRUMS%20(SINGLE%20HITS)/Hats/43[kb]707-ohh.wav.mp3"></audio>
+ <audio data-key="72" src="https://sampleswap.org/samples-ghost/MELODIC%20LOOPS/BASS%20LOOPS/248[kb]085_deep-acoustic-bass.wav.mp3"></audio>
+ <audio data-key="73" src="https://sampleswap.org/samples-ghost/MELODIC%20LOOPS/VOCAL%20OR%20VOXY%20LOOPS/691[kb]100-bpm-Crackle-Line-A-5.wav.mp3"></audio>
+ <audio data-key="75" src="https://sampleswap.org/samples-ghost/MELODIC%20LOOPS/VOCAL%20OR%20VOXY%20LOOPS/691[kb]100-bpm-Crackle-Line-A-5.wav.mp3"></audio>
+ <audio data-key="76" src="https://sampleswap.org/samples-ghost/MELODIC%20LOOPS/WORLD%20LOOPS/209[kb]100_afro-harp-octaves.wav.mp3"></audio>
+ <audio data-key="77" src="https://sampleswap.org/samples-ghost/MELODIC%20LOOPS/WORLD%20LOOPS/220[kb]192_backwards_flutey.wav.mp3"></audio>
+ <audio data-key="78" src="https://sampleswap.org/samples-ghost/MELODIC%20LOOPS/SAMPLED%20MUSIC%20LOOPS/906[kb]092_stuttery-clicky-epiano-chord.wav.mp3"></audio>
+ <audio data-key="79" src="https://sampleswap.org/samples-ghost/MELODIC%20LOOPS/KEYS%20ORGAN%20PIANO%20LOOPS/2240[kb]074_plaintive-epiano-chops.wav.mp3"></audio>
+ <audio data-key="84" src="https://sampleswap.org/samples-ghost/VOCALS%20and%20SPOKEN%20WORD/African%20Vocals%20Sung/758[kb]african-vocals-gubulah-mid.wav.mp3"></audio>
+ <audio data-key="85" src="https://sampleswap.org/samples-ghost/VOCALS%20and%20SPOKEN%20WORD/Indian%20Singing/1287[kb]male-indian-chanting.wav.mp3"></audio>
+ <script>
+// //    -------------------------  alert------------------------------
+//        alert('make ur sounds on otherwise u will not be able to get the sound');
+//     //    -------------------------prompt--------------------------------
+//      let age =prompt('enter your age?',"");
+//      console.log(age);
+//      if(age<18)
+//      {
+//          alert('you are not allowed here');         
+
+//      }
+//      else{ alert('you are allowed');
+//     }   //  ----------------------------------confirm-----------------------------------
+//     let deletePost = confirm("Do you really want to delete this post?");
+//     console.log(deletePost);
+//     if(deletePost){
+//             // Code to delete the post
+//             console.log("Your post has been deleted successfully");
+//             alert ('Your post has been deleted successfully');
+            
+//         }
+//         else{
+//             // Code to cancel deletion of the post
+//             console.log("Your post has not been deleted");
+//             alert('Your post has has not been deleted ');
+// //         }
+//         let i = 0;
+//      for(i=0; i<3;i++){
+//          console.log(i);
+//      }
+        // ---------------------------------------------------------------
+    // let deletep =confirm("are you sure u want to delete this post")
+     function playsound(e){
+         const audio=document.querySelector(`audio[data-key="${e.keyCode}"]`);
+         const key=document.querySelector(`.key[data-key="${e.keyCode}"]`);
+         
+         if(!audio)
+         return;
+         audio.currentTime =0;
+         audio.play();
+         key.classList.add('playing');
+         
+
+     }
+     window.addEventListener('keydown',playsound);
+ function removeTransition(e)
+ {
+    if(e.propertyName!=='transform') 
+    return;
+    this.classList.remove('playing');
+     }
+const keys=document.queryselectorAll('.key');
+keys.forEach(key=>key.removeEventListener('transitioned',removeTransition));
+window.addEventListener('keydown',removeTransition);
+
+ </script>
+</body>
+</html> -->
